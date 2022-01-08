@@ -1,0 +1,116 @@
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../materialize/font/material-icons.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: local(Roboto Thin), url("../../materialize/fonts/roboto/Roboto-Thin.woff2") format("woff2"), url("../../materialize/fonts/roboto/Roboto-Thin.woff") format("woff");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: local(Roboto Light), url("../../materialize/fonts/roboto/Roboto-Light.woff2") format("woff2"), url("../../materialize/fonts/roboto/Roboto-Light.woff") format("woff");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: local(Roboto Regular), url("../../materialize/fonts/roboto/Roboto-Regular.woff2") format("woff2"), url("../../materialize/fonts/roboto/Roboto-Regular.woff") format("woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: local(Roboto Medium), url("../../materialize/fonts/roboto/Roboto-Medium.woff2") format("woff2"), url("../../materialize/fonts/roboto/Roboto-Medium.woff") format("woff");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: local(Roboto Bold), url("../../materialize/fonts/roboto/Roboto-Bold.woff2") format("woff2"), url("../../materialize/fonts/roboto/Roboto-Bold.woff") format("woff");
+  font-weight: 700;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+body{
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+}
+#viewFields{
+  top: 0px !important;
+  width: 100%;
+  min-height: 100%;
+}
+.collapsible-body{
+  height: 20pc;
+}
+.downFile, .btProc{
+  margin-bottom: 10px;
+}
+/* Tela de carregamento */
+.telaCarg{
+  display: none;
+  position: absolute;
+  z-index: 1000;
+}
+.telaCarg.fundo{
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+}
+.st_prad, .st_prog, .st_read{
+  display: none;
+}
+/* Input Advenced */
+.ipAdv{
+  background: #c8dadf;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+  display: none;
+}
+.objAdv{
+  top: 8%;
+  margin: 10% 5% !important;
+  border: 2px dashed #92b0b3;
+  padding: 150px 0px;
+  position: relative;
+}
+.objAdv.active{
+  background: #ebf1f3;
+}
+.carousel-item img{
+  width: 250px !important;
+  height: 250px !important;
+}
+#upload {
+  display: none;
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Read File</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="materialize/css/estilos.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="materialize/css/materialize.min.css" />
+    <script src="materialize/js/jquery-3.2.1.min.js"></script>
+    <script src="materialize/js/materialize.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper blue darken-1">
+            <div class="col s12">
+                <a href="#!" class="breadcrumb st_chos">Importe um ou mais arquivos</a>
+                <a href="#!" class="breadcrumb st_read">Ler</a>
+                <a href="#!" class="breadcrumb st_prad">Padronizar</a>
+                <a href="#!" class="breadcrumb st_prog">Processar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Inicio Container -->
+    <div class="container">
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>Arquivo</span>
+                <input type="file" id="infile" accept='.csv' multiple="multiple"/>
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+
+        <ul class="collapsible" data-collapsible="accordion">
+            <li class="row">
+                <input type="text" class="datepicker calendary" style="display: none;">
+                <div class="collapsible-header" title="Opções avançadas"><i class="material-icons">subtitles</i>Avançado</div>
+                <div class="collapsible-body">
+                    <div class="input-field col s4 l2">
+                        <input name="separado" id="divisor" type="text" title="Divisor de campos" class="validate" value=";">
+                        <label for="divisor">Divisor</label>
+                    </div>
+                    <div class="input-field col s4 l2">
+                        <input name="ind_string" id="string" type="text" title="Limitador de campos (String)" class="validate" value='"'>
+                        <label for="string">Limitador</label>
+                    </div>
+                    <div class="input-field col s4 l2">
+                        <input name="limit_analise" id="analise" title="Procurar padrões nas primeiras (x) linhas" type="number" class="validate" value='100' min='5'>
+                        <label for="analise">Linhas a analizar</label>
+                    </div>
+                    <div class="input-field col s6 l3">
+                        <i class="material-icons prefix">format_clear</i>
+                        <input type="text" id="codification-input" title="Codificação de texto (Geral)" class="autocomplete" value="ISO-8859-1">
+                        <label for="codification-input">Codificação</label>
+                    </div>
+                    <div class="input-field col s6 l3">
+                        <i class="material-icons prefix">attachment</i>
+                        <input type="text" id="typeOp" title="Formato de saída" class="autocomplete" value="JSON">
+                        <label for="typeOp">Saída</label>
+                    </div>
+                    <div class="row col s12">
+                        <div class="col s6 l3">
+                            <input type="checkbox" id="automatic" checked/>
+                            <label for="automatic" title="Executar passos automaticamente">Automático</label>
+                        </div>
+                        <div class="col s6 l3">
+                            <input type="checkbox" id="notification"/>
+                            <label for="notification" title="Alerta estados atuais">Notificações</label>
+                        </div>
+                        <div class="col s6 l3">
+                            <input type="checkbox" id="jumpHead" />
+                            <label for="jumpHead" title="Pular primeira linha para criação de cabeçalho">Pular 1° linha</label>
+                        </div>
+                        <div class="col s6 l3">
+                            <input type="checkbox" id="preview" />
+                            <label for="preview" title="Visualizar a prévia das (x) linhas de saida">Visualizar</label>
+                        </div>
+                        <div class="col s6 l3">
+                            <input type="checkbox" id="multiple" checked/>
+                            <label for="multiple" title="Processamento de múltiplos arquivos">Pro-Múltiplo</label>
+                        </div>
+                        <div class="col s6 l3">
+                            <input type="checkbox" id="reading" checked/>
+                            <label for="reading" title="Ler arquivos automaticamente">Auto-leitura</label>
+                        </div>
+                        <div class="col s6 l3">
+                            <input type="checkbox" id="precod" />
+                            <label for="precod" title="Ler a codificação automaticamente">Pré-decodificação</label>
+                        </div>
+                        <div class="col s6 l3">
+                            <input type="checkbox" id="auto-division" checked/>
+                            <label for="auto-division" title="Ler a separador automaticamente">Auto-Separador</label>
+                        </div>
+                    </div>
+                    <a id="edit_column" title="Alterar nomes e tipos de campos" class="btn purple dark-2 col s12 waves-effect waves-blue" style="margin-bottom:10px">Modificar Campos</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="row">
+            <div class="carousel zoneDown" style="position:relative;display:none;overflow:hidden;"></div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12" title="Local da saida de resposta (Falhas vs Sucessos)">
+                <textarea name="saida_visao" id="output" class="materialize-textarea" data-length="12000"></textarea>
+                <label for="textarea1">Terminal de Saida</label>
+            </div>
+        </div>
+
+        <div class="row zoneAction"></div>
+    </div>
+
+    <!-- Fim Container -->
+
+    <div id="filds" class="modal">
+        <div class="modal-content locTable"></div>
+        <div class="modal-footer">
+            <a id="confirm_types"  title="Aplicar modificações" class="left modal-action modal-close waves-effect waves-green btn-flat btn green white-text">Confirm</a>
+            <a title="Sair sem alterar" class="right modal-action modal-close waves-effect waves-red btn-flat btn red white-text">Sair</a>
+        </div>
+    </div>
+
+    
+    <div id="viewFields" class="modal">
+        <div class="modal-content zoneView"></div>
+        <div class="modal-footer">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat btn red white-text">Sair</a>
+        </div>
+    </div>
+
+
+    <!-- Tela de carregamento inicio -->
+    <div class="row telaCarg fundo">
+        <div class="telaCarg col s6 offset-s3 m6 offset-m3  center" style="top: 40%;">
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div>
+              <div class="gap-patch">
+                <div class="circle"></div>
+              </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+              </div>
+            </div>
+  
+            <div class="spinner-layer spinner-red">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+  
+            <div class="spinner-layer spinner-yellow">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+  
+            <div class="spinner-layer spinner-green">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+          <h5 class="white-text">Carregando ...<br>  
+            <span class="modName"></span><br> 
+            <span class="modStatus"></span>
+          </h5>
+        </div>
+  
+        <div class="telaCarg fundo grey darken-3"></div> 
+    </div>
+    <!-- Tela de carregamento fim -->
+
+    <!-- Form advanced -->
+    <div class="ipAdv">
+        <div class="row objAdv" ondrop="dropHandler(event);">
+            <i class="material-icons prefix large col s12 center" style="color: #92b0b3;">file_download</i>
+            <span class="col s12 center" style="font-size: 1.25rem;">Solte os arquivos aqui.</span>
+        </div>
+    </div>
+</body>
+</html>
